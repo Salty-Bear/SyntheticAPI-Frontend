@@ -59,12 +59,12 @@ export default function LandingPage() {
                 </div>
               </div>
               <Image
-                src="https://picsum.photos/seed/ai-brain/600/600"
+                src="https://picsum.photos/seed/gopher/600/600"
                 alt="Hero"
                 width={600}
                 height={600}
                 className="mx-auto aspect-square overflow-hidden rounded-xl object-cover"
-                data-ai-hint="abstract digital"
+                data-ai-hint="golang gopher"
               />
             </div>
           </div>
