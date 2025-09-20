@@ -13,7 +13,7 @@ import Link from 'next/link';
 
 export default function LoginPage() {
   return (
-    <Card className="w-full max-w-sm">
+    <Card className="w-full max-w-sm bg-secondary/50 border-border">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>
