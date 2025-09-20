@@ -234,10 +234,24 @@
       transform: skew(-1deg);
     }
   }
+  
+  @keyframes grid-float {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+  
   .grid-bg {
     background-image:
       linear-gradient(to right, hsl(var(--border) / 0.5) 1px, transparent 1px),
       linear-gradient(to bottom, hsl(var(--border) / 0.5) 1px, transparent 1px);
     background-size: 4rem 4rem;
+    animation: grid-float 20s ease-in-out infinite;
   }
 }

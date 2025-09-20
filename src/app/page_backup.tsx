@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Activity,
   Cloud,
@@ -206,75 +207,28 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Interactive Code Demo Section */}
+        {/* Testimonial Section */}
         <section className="w-full bg-secondary/20 py-16 md:py-24 border-y border-border/40">
-          <div className="container px-4 md:px-6">
-            <div className="mx-auto max-w-6xl">
-              <div className="text-center mb-12">
-                <Badge
-                  variant="outline"
-                  className="border-primary/50 text-primary mb-4"
-                >
-                  See It In Action
-                </Badge>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                  From API Spec to Tests in Seconds
-                </h2>
-                <p className="mt-4 max-w-[600px] mx-auto text-muted-foreground">
-                  Watch as Syntra transforms your OpenAPI specification into comprehensive test suites with AI-powered intelligence.
+          <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
+            <div className="space-y-4">
+              <Image
+                src="https://picsum.photos/seed/ceo/64/64"
+                alt="CEO Avatar"
+                width={64}
+                height={64}
+                className="rounded-full mx-auto"
+                data-ai-hint="person portrait"
+              />
+              <p className="mx-auto max-w-prose text-2xl font-light md:text-3xl">
+                “Syntra has become an indispensable part of our CI/CD
+                pipeline. The AI-generated tests catch issues we would have
+                missed, saving us hours of manual work.”
+              </p>
+              <div>
+                <p className="font-semibold">Jane Doe</p>
+                <p className="text-sm text-muted-foreground">
+                  Head of Engineering, Future Systems Inc.
                 </p>
-              </div>
-              
-              <div className="grid gap-8 lg:grid-cols-2 items-center">
-                {/* Input Side */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                    <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                    OpenAPI Specification
-                  </div>
-                  <div className="rounded-lg border bg-background/50 p-4 font-mono text-sm">
-                    <div className="text-blue-400">paths:</div>
-                    <div className="ml-2 text-green-400">/api/users:</div>
-                    <div className="ml-4 text-yellow-400">post:</div>
-                    <div className="ml-6 text-gray-300">summary: Create user</div>
-                    <div className="ml-6 text-gray-300">requestBody:</div>
-                    <div className="ml-8 text-purple-400">required: true</div>
-                    <div className="ml-8 text-gray-300">content:</div>
-                    <div className="ml-10 text-blue-400">application/json:</div>
-                    <div className="ml-12 text-gray-300">schema:</div>
-                    <div className="ml-14 text-red-400">$ref: '#/components/schemas/User'</div>
-                  </div>
-                </div>
-
-                {/* Output Side */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                    <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-                    AI-Generated Test Suite
-                  </div>
-                  <div className="rounded-lg border bg-background/50 p-4 font-mono text-sm">
-                    <div className="text-blue-400">describe('POST /api/users', () =&gt; {'{'}</div>
-                    <div className="ml-2 text-green-400">it('creates user with valid data', async () =&gt; {'{'}</div>
-                    <div className="ml-4 text-gray-300">const response = await request</div>
-                    <div className="ml-6 text-yellow-400">.post('/api/users')</div>
-                    <div className="ml-6 text-yellow-400">.send({'{'}</div>
-                    <div className="ml-8 text-purple-400">name: 'John Doe',</div>
-                    <div className="ml-8 text-purple-400">email: 'john@example.com'</div>
-                    <div className="ml-6 text-yellow-400">{'}'})</div>
-                    <div className="ml-4 text-gray-300">expect(response.status).toBe(201)</div>
-                    <div className="ml-2 text-green-400">{'}'});</div>
-                    <div className="text-blue-400">{'}'});</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-12 flex justify-center">
-                <div className="flex items-center gap-4 rounded-full bg-primary/10 px-6 py-3 border border-primary/20">
-                  <FlaskConical className="h-5 w-5 text-primary" />
-                  <span className="text-sm font-medium">
-                    <span className="text-primary font-bold">50+</span> test scenarios generated automatically
-                  </span>
-                </div>
               </div>
             </div>
           </div>
