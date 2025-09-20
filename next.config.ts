@@ -1,4 +1,5 @@
 import type {NextConfig} from 'next';
+import path from 'path';
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -15,6 +16,10 @@ const nextConfig: NextConfig = {
       fs: false,
       path: false,
       os: false,
+    };
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      '@': path.resolve(__dirname, 'src'),
     };
     return config;
   },
