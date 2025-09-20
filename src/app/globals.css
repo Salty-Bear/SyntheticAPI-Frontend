@@ -4,69 +4,69 @@
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 173 98% 50%;
-    --primary-foreground: 222 47% 11%;
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
+    --primary: 150 78% 46%;
+    --primary-foreground: 150 78% 6%;
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 213 31% 91%;
+    --muted: 215 28% 17%;
+    --muted-foreground: 218 11% 65%;
+    --accent: 215 28% 17%;
+    --accent-foreground: 213 31% 91%;
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 173 98% 50%;
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 150 78% 46%;
     --radius: 0.5rem;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --sidebar-background: 222 47% 10%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 173 98% 50%;
-    --sidebar-primary-foreground: 222 47% 11%;
-    --sidebar-accent: 217 33% 15%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 15%;
-    --sidebar-ring: 173 98% 50%;
+    --sidebar-background: 224 71% 3%;
+    --sidebar-foreground: 213 31% 91%;
+    --sidebar-primary: 150 78% 46%;
+    --sidebar-primary-foreground: 150 78% 6%;
+    --sidebar-accent: 215 28% 15%;
+    --sidebar-accent-foreground: 213 31% 91%;
+    --sidebar-border: 215 28% 15%;
+    --sidebar-ring: 150 78% 46%;
   }
 
   .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 173 98% 50%;
-    --primary-foreground: 222 47% 11%;
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
+    --primary: 150 78% 46%;
+    --primary-foreground: 150 78% 6%;
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 213 31% 91%;
+    --muted: 215 28% 17%;
+    --muted-foreground: 218 11% 65%;
+    --accent: 215 28% 17%;
+    --accent-foreground: 213 31% 91%;
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 173 98% 50%;
-    --sidebar-background: 222 47% 10%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 173 98% 50%;
-    --sidebar-primary-foreground: 222 47% 11%;
-    --sidebar-accent: 217 33% 15%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 15%;
-    --sidebar-ring: 173 98% 50%;
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 150 78% 46%;
+    --sidebar-background: 224 71% 3%;
+    --sidebar-foreground: 213 31% 91%;
+    --sidebar-primary: 150 78% 46%;
+    --sidebar-primary-foreground: 150 78% 6%;
+    --sidebar-accent: 215 28% 15%;
+    --sidebar-accent-foreground: 213 31% 91%;
+    --sidebar-border: 215 28% 15%;
+    --sidebar-ring: 150 78% 46%;
   }
 }
 
@@ -95,13 +95,13 @@
   }
   .glitch::before {
     left: 2px;
-    text-shadow: -2px 0 #ff00c1;
+    text-shadow: -2px 0 #00e5ff;
     clip: rect(44px, 450px, 56px, 0);
     animation: glitch-anim 5s infinite linear alternate-reverse;
   }
   .glitch::after {
     left: -2px;
-    text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+    text-shadow: -2px 0 #ff48c4, 2px 2px #00e5ff;
     animation: glitch-anim2 1s infinite linear alternate-reverse;
   }
 
@@ -233,5 +233,11 @@
     100% {
       transform: skew(-1deg);
     }
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.5) 1px, transparent 1px);
+    background-size: 4rem 4rem;
   }
 }
