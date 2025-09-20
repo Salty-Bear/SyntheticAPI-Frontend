@@ -21,7 +21,7 @@ export default function CliPage() {
       <div className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">CLI Access</h1>
         <p className="text-muted-foreground">
-          Integrate SynData Inspector into your development workflow with our
+          Integrate Syntra into your development workflow with our
           cross-platform CLI.
         </p>
       </div>
@@ -34,7 +34,7 @@ export default function CliPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <CodeBlock>npm install -g syndata-cli</CodeBlock>
+          <CodeBlock>npm install -g syntra-cli</CodeBlock>
         </CardContent>
       </Card>
 
@@ -45,30 +45,30 @@ export default function CliPage() {
         <CardContent className="space-y-4">
           <div>
             <h3 className="flex items-center gap-2 font-semibold">
-              <Terminal className="size-4" /> syndata login
+              <Terminal className="size-4" /> syntra login
             </h3>
             <p className="text-sm text-muted-foreground">
-              Authenticate with your SynData account.
+              Authenticate with your Syntra account.
             </p>
-            <CodeBlock>syndata login</CodeBlock>
+            <CodeBlock>syntra login</CodeBlock>
           </div>
           <div>
             <h3 className="flex items-center gap-2 font-semibold">
-              <Terminal className="size-4" /> syndata tunnel create
+              <Terminal className="size-4" /> syntra tunnel create
             </h3>
             <p className="text-sm text-muted-foreground">
               Create a new reverse tunnel.
             </p>
-            <CodeBlock>syndata tunnel create --port 3000 --name my-api</CodeBlock>
+            <CodeBlock>syntra tunnel create --port 3000 --name my-api</CodeBlock>
           </div>
           <div>
             <h3 className="flex items-center gap-2 font-semibold">
-              <Terminal className="size-4" /> syndata test run
+              <Terminal className="size-4" /> syntra test run
             </h3>
             <p className="text-sm text-muted-foreground">
               Run a test suite from a file.
             </p>
-            <CodeBlock>syndata test run ./tests/api.json</CodeBlock>
+            <CodeBlock>syntra test run ./tests/api.json</CodeBlock>
           </div>
         </CardContent>
       </Card>

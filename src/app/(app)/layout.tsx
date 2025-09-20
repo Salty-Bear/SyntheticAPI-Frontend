@@ -27,7 +27,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <SidebarHeader className="p-4">
           <div className="flex items-center gap-3">
             <Logo className="size-8 text-primary" />
-            <span className="text-lg font-semibold">SynData</span>
+            <span className="text-lg font-semibold">Syntra</span>
           </div>
         </SidebarHeader>
         <SidebarContent>

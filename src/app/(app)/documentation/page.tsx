@@ -21,7 +21,7 @@ export default function DocumentationPage() {
       <div className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">API Documentation</h1>
         <p className="text-muted-foreground">
-          Integrate with SynData Inspector using our public API.
+          Integrate with Syntra using our public API.
         </p>
       </div>
 
@@ -56,7 +56,7 @@ export default function DocumentationPage() {
         <CardHeader>
           <CardTitle className="flex items-center gap-4">
             <Badge className="bg-green-600 text-white">POST</Badge>
-            <span>/api/v1/tests/&#123;suiteId&#125;/run</span>
+            <span>/api/v1/tests/{'{}'}suiteId{'{}'}/run</span>
           </CardTitle>
           <CardDescription>
             Trigger a new test run for a specific suite.
@@ -78,7 +78,7 @@ export default function DocumentationPage() {
         <CardHeader>
           <CardTitle className="flex items-center gap-4">
             <Badge className="bg-blue-600 text-white">GET</Badge>
-            <span>/api/v1/runs/&#123;runId&#125;</span>
+            <span>/api/v1/runs/{'{}'}runId{'{}'}</span>
           </CardTitle>
           <CardDescription>
             Get the status and results of a specific test run.

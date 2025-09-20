@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'SynData Inspector',
+  title: 'Syntra',
   description: 'Inspect and test your APIs with AI-powered tools.',
 };
 

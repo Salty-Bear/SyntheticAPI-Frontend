@@ -17,7 +17,7 @@ export default function LandingPage() {
           <Link href="#" className="flex items-center justify-center">
             <Logo className="size-6 text-primary" />
             <span className="ml-3 text-lg font-semibold text-gray-900">
-              SynData Inspector
+              Syntra
             </span>
           </Link>
           <nav className="ml-auto flex items-center gap-4 sm:gap-6">
@@ -44,7 +44,7 @@ export default function LandingPage() {
                     Inspect and Test Your APIs with AI
                   </h1>
                   <p className="max-w-[600px] text-lg text-gray-600">
-                    SynData Inspector provides AI-powered tools to generate test
+                    Syntra provides AI-powered tools to generate test
                     cases, analyze performance, and ensure your APIs are robust
                     and secure.
                   </p>
@@ -142,7 +142,7 @@ export default function LandingPage() {
           <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
               <p className="mx-auto max-w-prose text-2xl font-light text-gray-700 md:text-3xl">
-                “SynData Inspector has become an indispensable part of our CI/CD
+                “Syntra has become an indispensable part of our CI/CD
                 pipeline. The AI-generated tests catch issues we would have
                 missed.”
               </p>
@@ -187,7 +187,7 @@ export default function LandingPage() {
       <footer className="w-full shrink-0 border-t bg-gray-100">
         <div className="container flex flex-col items-center justify-between gap-2 px-4 py-6 sm:flex-row md:px-6">
           <p className="text-xs text-gray-600">
-            &copy; 2024 SynData Inc. All rights reserved.
+            &copy; 2024 Syntra Inc. All rights reserved.
           </p>
           <nav className="flex gap-4 sm:ml-auto sm:gap-6">
             <Link
