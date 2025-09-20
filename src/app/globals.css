@@ -4,24 +4,25 @@
 
 @layer base {
   :root {
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
-    --card: 224 71% 4%;
-    --card-foreground: 213 31% 91%;
-    --popover: 224 71% 4%;
-    --popover-foreground: 213 31% 91%;
+    /* Light theme variables */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
     --primary: 150 78% 46%;
-    --primary-foreground: 150 78% 6%;
-    --secondary: 215 28% 17%;
-    --secondary-foreground: 213 31% 91%;
-    --muted: 215 28% 17%;
-    --muted-foreground: 218 11% 65%;
-    --accent: 215 28% 17%;
-    --accent-foreground: 213 31% 91%;
-    --destructive: 0 63% 31%;
+    --primary-foreground: 150 78% 96%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 215 28% 17%;
-    --input: 215 28% 17%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
     --ring: 150 78% 46%;
     --radius: 0.5rem;
     --chart-1: 220 70% 50%;
@@ -29,13 +30,13 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --sidebar-background: 224 71% 3%;
-    --sidebar-foreground: 213 31% 91%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 222.2 84% 4.9%;
     --sidebar-primary: 150 78% 46%;
-    --sidebar-primary-foreground: 150 78% 6%;
-    --sidebar-accent: 215 28% 15%;
-    --sidebar-accent-foreground: 213 31% 91%;
-    --sidebar-border: 215 28% 15%;
+    --sidebar-primary-foreground: 150 78% 96%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
+    --sidebar-border: 214.3 31.8% 91.4%;
     --sidebar-ring: 150 78% 46%;
   }
 
@@ -249,9 +250,9 @@
   
   .grid-bg {
     background-image:
-      linear-gradient(to right, hsl(var(--border) / 0.5) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--border) / 0.5) 1px, transparent 1px);
-    background-size: 4rem 4rem;
-    animation: grid-float 20s ease-in-out infinite;
+      linear-gradient(to right, hsl(var(--border) / 0.8) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.8) 1px, transparent 1px);
+    background-size: 3rem 3rem;
+    animation: grid-float 45s ease-in-out infinite;
   }
 }

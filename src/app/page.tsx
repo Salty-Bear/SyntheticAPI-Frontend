@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons';
+import { ThemeToggle } from '@/components/theme-toggle';
 import Link from 'next/link';
 import {
   Activity,
@@ -44,6 +45,7 @@ export default function LandingPage() {
             </Link>
           </nav>
           <div className="ml-auto flex items-center gap-4">
+            <ThemeToggle />
             <Button variant="ghost" asChild>
               <Link href="/login">Login</Link>
             </Button>
