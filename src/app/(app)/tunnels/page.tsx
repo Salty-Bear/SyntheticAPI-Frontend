@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -25,8 +27,17 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 
 export default function TunnelsPage() {
+  return (
+    <ProtectedRoute>
+      <TunnelsContent />
+    </ProtectedRoute>
+  );
+}
+
+function TunnelsContent() {
   return (
     <div className="grid gap-6">
       <div className="space-y-2">

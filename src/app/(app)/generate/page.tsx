@@ -1,6 +1,17 @@
+"use client";
+
 import { GenerationForm } from './generation-form';
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 
 export default function GeneratePage() {
+  return (
+    <ProtectedRoute>
+      <GenerateContent />
+    </ProtectedRoute>
+  );
+}
+
+function GenerateContent() {
   return (
     <div className="grid gap-6">
       <div className="space-y-2">
