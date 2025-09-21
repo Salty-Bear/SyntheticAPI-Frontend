@@ -1,6 +1,17 @@
+"use client";
+
 import { TestExecutionClient } from './test-execution-client';
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 
 export default function ExecutePage() {
+  return (
+    <ProtectedRoute>
+      <ExecuteContent />
+    </ProtectedRoute>
+  );
+}
+
+function ExecuteContent() {
   return (
     <div className="grid gap-6">
       <div className="space-y-2">

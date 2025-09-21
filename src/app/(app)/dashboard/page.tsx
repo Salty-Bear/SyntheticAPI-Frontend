@@ -1,8 +1,19 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, Clock, ShieldCheck, TestTube } from 'lucide-react';
 import { ResponseTimeChart, ErrorRateChart } from './charts';
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 
 export default function DashboardPage() {
+  return (
+    <ProtectedRoute>
+      <DashboardContent />
+    </ProtectedRoute>
+  );
+}
+
+function DashboardContent() {
   return (
     <div className="grid gap-6">
       <h1 className="text-3xl font-bold tracking-tight">

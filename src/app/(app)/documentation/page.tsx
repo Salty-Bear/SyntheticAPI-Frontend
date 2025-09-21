@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -6,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 
 const CodeBlock = ({ children }: { children: React.ReactNode }) => (
   <pre className="mt-2 w-full whitespace-pre-wrap rounded-md bg-secondary p-4">
@@ -16,6 +19,14 @@ const CodeBlock = ({ children }: { children: React.ReactNode }) => (
 );
 
 export default function DocumentationPage() {
+  return (
+    <ProtectedRoute>
+      <DocumentationContent />
+    </ProtectedRoute>
+  );
+}
+
+function DocumentationContent() {
   return (
     <div className="grid gap-6">
       <div className="space-y-2">

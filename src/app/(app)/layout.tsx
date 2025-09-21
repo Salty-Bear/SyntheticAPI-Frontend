@@ -1,3 +1,6 @@
+"use client";
+
+import { useRouter } from 'next/navigation';
 import {
   SidebarProvider,
   Sidebar,
@@ -21,11 +24,16 @@ import { SidebarNav } from '@/components/layout/sidebar-nav';
 import Header from '@/components/layout/header';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+
   return (
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader className="p-4">
-          <div className="flex items-center gap-3">
+          <div
+            className="flex items-center gap-3"
+            onClick={() => router.push('/')}
+          >
             <Logo className="size-8 text-primary" />
             <span className="text-lg font-semibold">Syntra</span>
           </div>
