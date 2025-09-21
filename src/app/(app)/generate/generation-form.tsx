@@ -17,7 +17,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { handleGenerateTestCases } from '@/app/actions/generation';
 import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
@@ -42,18 +41,6 @@ export function GenerationForm() {
     setIsLoading(true);
     setGeneratedTests('');
     try {
-      const result = await handleGenerateTestCases(values);
-      if (result && result.testCases) {
-        setGeneratedTests(result.testCases);
-        toast({
-          title: 'Success!',
-          description: 'Test cases generated successfully.',
-        });
-      } else {
-        throw new Error(
-          'Failed to generate test cases. The result was empty.'
-        );
-      }
     } catch (error) {
       console.error(error);
       toast({
