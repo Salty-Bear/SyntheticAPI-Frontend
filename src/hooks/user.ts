@@ -1,9 +1,9 @@
 import { hookstate, State, useHookstate } from "@hookstate/core";
 import { fetchClient } from "@/lib/fetchClient";
 import { User as FirebaseUser } from "firebase/auth";
+import API_SERVER from "../../config/server";
 
-// Using the provided endpoint
-const USER_API_SERVER = "https://syntheticapi-backend-1.onrender.com";
+
 
 interface User {
   id: string;
@@ -58,7 +58,7 @@ const state = hookstate<UserState>({
   deletingUser: false,
 });
 
-const wrapState = (state: State<UserState>) => {
+const wrapState = () => {
   return {
     // Create user (for signup)
     createUser: async (userData: CreateUserData) => {
@@ -67,7 +67,7 @@ const wrapState = (state: State<UserState>) => {
       state.successMessage.set("");
 
       try {
-        const response = await fetchClient(`${USER_API_SERVER}/users/v1/`, {
+        const response = await fetchClient(`${API_SERVER}/users/v1/`, {
           method: "POST",
           body: JSON.stringify(userData),
         });
@@ -83,6 +83,8 @@ const wrapState = (state: State<UserState>) => {
         if (data.data) {
           state.users.set(prev => [...prev, data.data]);
         }
+
+        state.loadingUser.set(false);
         
         return data.data;
       } catch (error: any) {
@@ -99,7 +101,7 @@ const wrapState = (state: State<UserState>) => {
       state.errorMessage.set("");
 
       try {
-        const response = await fetchClient(`${USER_API_SERVER}/user/v1/`);
+        const response = await fetchClient(`${API_SERVER}/user/v1/`);
         const data = await response.json();
         
         if (!response.ok) {
@@ -121,7 +123,7 @@ const wrapState = (state: State<UserState>) => {
       state.errorMessage.set("");
 
       try {
-        const response = await fetchClient(`${USER_API_SERVER}/user/v1/${userId}`);
+        const response = await fetchClient(`${API_SERVER}/user/v1/${userId}`);
         const data = await response.json();
         
         if (!response.ok) {
@@ -146,7 +148,7 @@ const wrapState = (state: State<UserState>) => {
       state.successMessage.set("");
 
       try {
-        const response = await fetchClient(`${USER_API_SERVER}/user/v1/${userId}`, {
+        const response = await fetchClient(`${API_SERVER}/user/v1/${userId}`, {
           method: "PUT",
           body: JSON.stringify(userData),
         });
@@ -186,7 +188,7 @@ const wrapState = (state: State<UserState>) => {
       state.successMessage.set("");
 
       try {
-        const response = await fetchClient(`${USER_API_SERVER}/user/v1/${userId}`, {
+        const response = await fetchClient(`${API_SERVER}/user/v1/${userId}`, {
           method: "DELETE",
         });
 
@@ -247,4 +249,4 @@ const wrapState = (state: State<UserState>) => {
   };
 };
 
-export const useUserState = () => wrapState(useHookstate(state));
+export const useUserState = () => wrapState();

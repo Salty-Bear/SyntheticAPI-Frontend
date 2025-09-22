@@ -5,7 +5,7 @@ import { auth, googleProvider } from '@/lib/firebase';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useUserState } from '@/hooks/useUser';
+import { useUserState } from '@/hooks/user';
 
 interface GoogleSignInProps {
   onSuccess?: (user: User) => void;

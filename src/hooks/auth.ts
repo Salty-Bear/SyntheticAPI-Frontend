@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword
 } from 'firebase/auth';
 import { auth, googleProvider } from '@/lib/firebase';
+import { useUserState } from "./user";
 
 interface FirebaseAuthState {
   user: FirebaseUser | null;
@@ -33,8 +34,11 @@ const state = hookstate<FirebaseAuthState>({
   onUserChanged: undefined,
 });
 
-const wrapState = (state: State<FirebaseAuthState>) => {
+const wrapState = () => {
   return {
+
+    stateUser: useUserState(),
+
     // Initialize auth state listener
     initializeAuth: () => {
       const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -87,12 +91,24 @@ const wrapState = (state: State<FirebaseAuthState>) => {
       try {
         const result = await signInWithPopup(auth, googleProvider);
         state.successMessage.set("Successfully signed in with Google");
+        
+        const userState = useUserState();
+        await userState.createUser({
+          email: result.user.email || '',
+          name: result.user.displayName || '',
+          phone: result.user.phoneNumber || '',
+          profile_pic: result.user.photoURL || '',
+        });
+
+        
+        
         return result.user;
       } catch (error: any) {
         state.errorMessage.set(error.message || "Failed to sign in with Google");
         throw error;
       } finally {
         state.signingIn.set(false);
+
       }
     },
 
@@ -196,4 +212,4 @@ const wrapState = (state: State<FirebaseAuthState>) => {
   };
 };
 
-export const useAuth = () => wrapState(useHookstate(state));
+export const useAuth = () => wrapState();
