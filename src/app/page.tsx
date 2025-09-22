@@ -60,8 +60,8 @@ export default function LandingPage() {
         {/* Hero Section */}
         <section className="relative w-full py-24 md:py-40 lg:py-48 grid-bg">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
-          <div className="relative w-full flex justify-center">
-            <div className="w-full max-w-4xl text-center px-4 md:px-6">
+          <div className="container relative mx-auto flex justify-center">
+            <div className="max-w-4xl text-center px-4 md:px-6">
               <div className="inline-block rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-primary">
                 <Zap className="mr-2 inline size-4" />
                 Now powered by Gemini 2.5
@@ -96,7 +96,7 @@ export default function LandingPage() {
 
         {/* Stats Section */}
         <section className="w-full border-y border-border/40 bg-secondary/20 py-16 md:py-24">
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-auto">
             <div className="grid grid-cols-2 gap-8 text-center lg:grid-cols-4">
               <div className="flex flex-col items-center gap-2">
                 <p className="text-4xl font-bold text-primary">10x</p>
@@ -128,7 +128,7 @@ export default function LandingPage() {
 
         {/* Features Section */}
         <section id="features" className="w-full py-20 md:py-32">
-          <div className="container space-y-16 px-4 md:px-6">
+          <div className="container space-y-16 px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <Badge
@@ -213,7 +213,7 @@ export default function LandingPage() {
 
         {/* Interactive Code Demo Section */}
         <section className="w-full bg-secondary/20 py-16 md:py-24 border-y border-border/40">
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-auto">
             <div className="mx-auto max-w-6xl">
               <div className="text-center mb-12">
                 <Badge
@@ -287,7 +287,7 @@ export default function LandingPage() {
 
         {/* Final CTA Section */}
         <section className="w-full py-20 md:py-32">
-          <div className="container flex flex-col items-center gap-4 px-4 text-center md:px-6">
+          <div className="container flex flex-col items-center gap-4 px-4 text-center md:px-6 mx-auto">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
               Ready to supercharge your API testing?
             </h2>
