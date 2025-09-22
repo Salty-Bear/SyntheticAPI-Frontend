@@ -58,7 +58,7 @@ export default function LandingPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative w-full py-24 md:py-40 lg:py-48 grid-bg">
+        <section className="relative w-full min-h-screen flex items-center justify-center grid-bg">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
           <div className="container relative mx-auto flex justify-center">
             <div className="max-w-4xl text-center px-4 md:px-6">
