@@ -60,19 +60,22 @@ export default function LandingPage() {
         {/* Hero Section */}
         <section className="relative w-full py-24 md:py-40 lg:py-48 grid-bg">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
-          <div className="container relative px-4 md:px-6">
-            <div className="mx-auto max-w-4xl text-center">
+          <div className="relative w-full flex justify-center">
+            <div className="w-full max-w-4xl text-center px-4 md:px-6">
               <div className="inline-block rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-primary">
                 <Zap className="mr-2 inline size-4" />
                 Now powered by Gemini 2.5
               </div>
               <h1
-                className="mt-6 text-5xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-foreground to-muted-foreground sm:text-6xl xl:text-7xl/none"
+                className="mt-6 text-5xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-foreground to-muted-foreground sm:text-6xl xl:text-7xl/none text-center"
               >
-                Intelligent API Testing,{' '}
-                <span className="glitch" data-text="Automated.">
-                  Automated.
-                </span>
+                <div className="leading-tight">
+                  Intelligent API Testing,
+                  <br />
+                  <span className="glitch" data-text="Automated.">
+                    Automated.
+                  </span>
+                </div>
               </h1>
               <p className="mt-6 max-w-[600px] mx-auto text-lg text-muted-foreground">
                 Syntra is the AI-native platform for comprehensive API testing.
