@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/contexts/theme-context';
-import { AuthProvider } from '@/contexts/auth-context';
+import { AuthProvider } from '@/components/auth/AuthProvider';
 
 export const metadata: Metadata = {
   title: 'Syntra',
@@ -32,8 +32,8 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="dark" storageKey="syntra-ui-theme">
           <AuthProvider>
             {children}
-            <Toaster />
           </AuthProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

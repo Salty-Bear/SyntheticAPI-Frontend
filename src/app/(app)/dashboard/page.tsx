@@ -3,14 +3,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, Clock, ShieldCheck, TestTube } from 'lucide-react';
 import { ResponseTimeChart, ErrorRateChart } from './charts';
-import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 
 export default function DashboardPage() {
-  return (
-    <ProtectedRoute>
-      <DashboardContent />
-    </ProtectedRoute>
-  );
+  return <DashboardContent />;
 }
 
 function DashboardContent() {

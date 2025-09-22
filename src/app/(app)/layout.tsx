@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/hooks/auth';
 import {
   SidebarProvider,
   Sidebar,
@@ -54,6 +55,17 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 }
 
 function UserMenu() {
+  const { user, signOut } = useAuth();
+  const currentUser = user.get();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -63,15 +75,21 @@ function UserMenu() {
         >
           <Avatar className="size-8">
             <AvatarImage
-              src="https://picsum.photos/seed/user/40/40"
+              src={currentUser?.photoURL || "https://picsum.photos/seed/user/40/40"}
               alt="User"
               data-ai-hint="person portrait"
             />
-            <AvatarFallback>U</AvatarFallback>
+            <AvatarFallback>
+              {currentUser?.displayName?.charAt(0)?.toUpperCase() || 'U'}
+            </AvatarFallback>
           </Avatar>
           <div className="text-left">
-            <p className="text-sm font-medium">User</p>
-            <p className="text-xs text-muted-foreground">user@example.com</p>
+            <p className="text-sm font-medium">
+              {currentUser?.displayName || 'User'}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              {currentUser?.email || 'user@example.com'}
+            </p>
           </div>
         </Button>
       </DropdownMenuTrigger>
@@ -81,7 +99,7 @@ function UserMenu() {
         <DropdownMenuItem>Profile</DropdownMenuItem>
         <DropdownMenuItem>Settings</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Log out</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleSignOut}>Log out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

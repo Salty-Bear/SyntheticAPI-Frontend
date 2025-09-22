@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/hooks/auth';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -10,16 +10,19 @@ interface ProtectedRouteProps {
 }
 
 export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
-  const { user, loading } = useAuth();
+  const { user, loading, initializing } = useAuth();
   const router = useRouter();
 
+  const isLoading = loading.get() || initializing.get();
+  const currentUser = user.get();
+
   useEffect(() => {
-    if (!loading && !user) {
+    if (!isLoading && !currentUser) {
       router.push('/login');
     }
-  }, [user, loading, router]);
+  }, [currentUser, isLoading, router]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       fallback || (
         <div className="min-h-screen flex items-center justify-center">
@@ -32,7 +35,7 @@ export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
     );
   }
 
-  if (!user) {
+  if (!currentUser) {
     return null; // Will redirect to login
   }
 

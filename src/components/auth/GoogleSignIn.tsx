@@ -5,6 +5,7 @@ import { auth, googleProvider } from '@/lib/firebase';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useUserState } from '@/hooks/user';
 
 interface GoogleSignInProps {
   onSuccess?: (user: User) => void;
@@ -14,12 +15,28 @@ interface GoogleSignInProps {
 export function GoogleSignIn({ onSuccess, onError }: GoogleSignInProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const { createUser } = useUserState();
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
+      
+      // Create user in backend
+      try {
+        await createUser({
+          email: user.email || '',
+          name: user.displayName || '',
+          profile_pic: user.photoURL || '',
+          
+        });
+        console.log('User created in backend successfully');
+      } catch (backendError) {
+        console.error('Error creating user in backend:', backendError);
+        // Continue with the flow even if backend creation fails
+        // You might want to handle this differently based on your requirements
+      }
       
       // Call success callback if provided
       if (onSuccess) {
