@@ -70,9 +70,9 @@ export default function LandingPage() {
                 className="mt-6 text-5xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-foreground to-muted-foreground sm:text-6xl xl:text-7xl/none text-center"
               >
                 <div className="leading-tight">
-                  Intelligent API Testing,
+                  <span className="shimmer">Intelligent API Testing,</span>
                   <br />
-                  <span className="glitch" data-text="Automated.">
+                  <span className="typewriter" data-text="Automated.">
                     Automated.
                   </span>
                 </div>

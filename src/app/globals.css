@@ -255,4 +255,116 @@
     background-size: 3rem 3rem;
     animation: grid-float 45s ease-in-out infinite;
   }
+
+  .shimmer {
+    position: relative;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--foreground)),
+      hsl(var(--primary)),
+      hsl(var(--foreground))
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer-slide 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer-slide {
+    0% {
+      background-position: -200% 0;
+    }
+    50% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  .typewriter {
+    position: relative;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)),
+      hsl(var(--chart-2)),
+      hsl(var(--primary))
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: typewriter-glow 2s ease-in-out infinite alternate;
+  }
+
+  .typewriter::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: hsl(var(--primary));
+    animation: cursor-blink 1s infinite;
+  }
+
+  @keyframes typewriter-glow {
+    0% {
+      background-position: 0% 50%;
+      filter: brightness(1);
+    }
+    100% {
+      background-position: 100% 50%;
+      filter: brightness(1.2) drop-shadow(0 0 8px hsl(var(--primary) / 0.5));
+    }
+  }
+
+  @keyframes cursor-blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+
+  .matrix-text {
+    position: relative;
+    background: linear-gradient(
+      45deg,
+      hsl(var(--primary)),
+      hsl(var(--chart-2)),
+      hsl(var(--primary)),
+      hsl(var(--chart-1))
+    );
+    background-size: 400% 400%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: matrix-flow 4s ease-in-out infinite;
+  }
+
+  @keyframes matrix-flow {
+    0% {
+      background-position: 0% 50%;
+      filter: hue-rotate(0deg);
+    }
+    25% {
+      background-position: 100% 50%;
+      filter: hue-rotate(90deg);
+    }
+    50% {
+      background-position: 100% 100%;
+      filter: hue-rotate(180deg);
+    }
+    75% {
+      background-position: 0% 100%;
+      filter: hue-rotate(270deg);
+    }
+    100% {
+      background-position: 0% 50%;
+      filter: hue-rotate(360deg);
+    }
+  }
 }
