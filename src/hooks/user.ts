@@ -4,19 +4,8 @@ import { User as FirebaseUser } from "firebase/auth";
 import API_SERVER from "../../config/server";
 
 
-
 interface User {
-  id: string;
-  email: string;
-  name: string;
-  phone?: string;
-  role?: string;
-  status?: string;
-  created_at: string;
-  updated_at: string;
-}
-
-interface CreateUserData {
+  id?: string;
   email: string;
   name: string;
   phone?: string;
@@ -24,13 +13,6 @@ interface CreateUserData {
   profile_pic?: string;
 }
 
-interface UpdateUserData {
-  email?: string;
-  name?: string;
-  phone?: string;
-  role?: string;
-  status?: string;
-}
 
 interface UserState {
   loading: boolean;
@@ -61,7 +43,7 @@ const state = hookstate<UserState>({
 const wrapState = () => {
   return {
     // Create user (for signup)
-    createUser: async (userData: CreateUserData) => {
+    createUser: async (userData: User) => {
       state.creatingUser.set(true);
       state.errorMessage.set("");
       state.successMessage.set("");
@@ -142,7 +124,7 @@ const wrapState = () => {
     },
 
     // Update user by ID
-    updateUser: async (userId: string, userData: UpdateUserData) => {
+    updateUser: async (userId: string, userData: User) => {
       state.updatingUser.set(true);
       state.errorMessage.set("");
       state.successMessage.set("");
@@ -221,27 +203,13 @@ const wrapState = () => {
       state.currentUser.set(null);
     },
 
-    // Clear messages
-    clearMessages: () => {
-      state.errorMessage.set("");
-      state.successMessage.set("");
-    },
-
-    // Clear all state
-    clearAll: () => {
-      state.users.set([]);
-      state.currentUser.set(null);
-      state.errorMessage.set("");
-      state.successMessage.set("");
-    },
-
     // State getters
     loading: state.loading,
     errorMessage: state.errorMessage,
     successMessage: state.successMessage,
     users: state.users,
     currentUser: state.currentUser,
-    loadingUsers: state.loadingUsers,
+    loadingUsers: state.loadingUsers,   
     loadingUser: state.loadingUser,
     creatingUser: state.creatingUser,
     updatingUser: state.updatingUser,
