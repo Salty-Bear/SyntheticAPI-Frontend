@@ -64,6 +64,8 @@ const wrapState = () => {
         // Add the new user to the users array if it exists in response
         if (data.data) {
           state.users.set(prev => [...prev, data.data]);
+          // Also set as current user
+          state.currentUser.set(data.data);
         }
 
         state.loadingUser.set(false);
@@ -106,6 +108,30 @@ const wrapState = () => {
 
       try {
         const response = await fetchClient(`${API_SERVER}/user/v1/${userId}`);
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.message || "Failed to fetch user");
+        }
+
+        state.currentUser.set(data.data || null);
+        return data.data;
+      } catch (error: any) {
+        state.errorMessage.set(error.message || "Failed to fetch user");
+        state.currentUser.set(null);
+        throw error;
+      } finally {
+        state.loadingUser.set(false);
+      }
+    },
+
+    // Get user by email
+    fetchUserByEmail: async (email: string) => {
+      state.loadingUser.set(true);
+      state.errorMessage.set("");
+
+      try {
+        const response = await fetchClient(`${API_SERVER}/users/v1/email/${encodeURIComponent(email)}`);
         const data = await response.json();
         
         if (!response.ok) {

@@ -34,10 +34,13 @@ const state = hookstate<FirebaseAuthState>({
   onUserChanged: undefined,
 });
 
+// Create a singleton instance of user state
+const userStateInstance = useUserState();
+
 const wrapState = () => {
   return {
 
-    stateUser: useUserState(),
+    stateUser: userStateInstance,
 
     // Initialize auth state listener
     initializeAuth: () => {
@@ -50,6 +53,26 @@ const wrapState = () => {
           try {
             const token = await user.getIdToken();
             document.cookie = `firebase-token=${token}; path=/; max-age=3600; SameSite=Strict`;
+            
+            // Fetch user data from database using email
+            try {
+              await userStateInstance.fetchUserByEmail(user.email || '');
+            } catch (error) {
+              console.error('Error fetching user data from database:', error);
+              // If user doesn't exist in database, create them
+              if (user.email) {
+                try {
+                  await userStateInstance.createUser({
+                    email: user.email,
+                    name: user.displayName || '',
+                    phone: user.phoneNumber || '',
+                    profile_pic: user.photoURL || '',
+                  });
+                } catch (createError) {
+                  console.error('Error creating user in database:', createError);
+                }
+              }
+            }
             
             // Call user changed callback if provided
             const onUserChanged = state.get().onUserChanged;
@@ -66,6 +89,9 @@ const wrapState = () => {
           }
         } else {
           document.cookie = 'firebase-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+          
+          // Clear user data when logged out
+          userStateInstance.clearCurrentUser();
           
           // Call user changed callback if provided
           const onUserChanged = state.get().onUserChanged;
@@ -92,15 +118,8 @@ const wrapState = () => {
         const result = await signInWithPopup(auth, googleProvider);
         state.successMessage.set("Successfully signed in with Google");
         
-        const userState = useUserState();
-        await userState.createUser({
-          email: result.user.email || '',
-          name: result.user.displayName || '',
-          phone: result.user.phoneNumber || '',
-          profile_pic: result.user.photoURL || '',
-        });
-
-        
+        // User data will be fetched automatically in the auth state change listener
+        // No need to manually create/fetch user here as it's handled in initializeAuth
         
         return result.user;
       } catch (error: any) {
@@ -108,7 +127,6 @@ const wrapState = () => {
         throw error;
       } finally {
         state.signingIn.set(false);
-
       }
     },
 
