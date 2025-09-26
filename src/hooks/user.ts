@@ -64,6 +64,8 @@ const wrapState = () => {
         // Add the new user to the users array if it exists in response
         if (data.data) {
           state.users.set(prev => [...prev, data.data]);
+          // Also set as current user
+          state.currentUser.set(data.data);
         }
 
         state.loadingUser.set(false);
@@ -83,7 +85,7 @@ const wrapState = () => {
       state.errorMessage.set("");
 
       try {
-        const response = await fetchClient(`${API_SERVER}/user/v1/`);
+        const response = await fetchClient(`${API_SERVER}/users/v1/`);
         const data = await response.json();
         
         if (!response.ok) {
@@ -105,7 +107,31 @@ const wrapState = () => {
       state.errorMessage.set("");
 
       try {
-        const response = await fetchClient(`${API_SERVER}/user/v1/${userId}`);
+        const response = await fetchClient(`${API_SERVER}/users/v1/${userId}`);
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.message || "Failed to fetch user");
+        }
+
+        state.currentUser.set(data.data || null);
+        return data.data;
+      } catch (error: any) {
+        state.errorMessage.set(error.message || "Failed to fetch user");
+        state.currentUser.set(null);
+        throw error;
+      } finally {
+        state.loadingUser.set(false);
+      }
+    },
+
+    // Get user by email
+    fetchUserByEmail: async (email: string) => {
+      state.loadingUser.set(true);
+      state.errorMessage.set("");
+
+      try {
+        const response = await fetchClient(`${API_SERVER}/users/v1/email/${encodeURIComponent(email)}`);
         const data = await response.json();
         
         if (!response.ok) {
@@ -130,7 +156,7 @@ const wrapState = () => {
       state.successMessage.set("");
 
       try {
-        const response = await fetchClient(`${API_SERVER}/user/v1/${userId}`, {
+        const response = await fetchClient(`${API_SERVER}/users/v1/${userId}`, {
           method: "PUT",
           body: JSON.stringify(userData),
         });
@@ -170,7 +196,7 @@ const wrapState = () => {
       state.successMessage.set("");
 
       try {
-        const response = await fetchClient(`${API_SERVER}/user/v1/${userId}`, {
+        const response = await fetchClient(`${API_SERVER}/users/v1/${userId}`, {
           method: "DELETE",
         });
 
