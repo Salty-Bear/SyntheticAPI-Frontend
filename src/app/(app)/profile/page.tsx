@@ -22,14 +22,14 @@ export default function ProfilePage() {
 function ProfileContent() {
   const { user, stateUser } = useAuth();
   const { toast } = useToast();
-  
+
   // Use hookstate for reactive updates
   const currentUserState = useHookstate(user);
-  const dbUserState = useHookstate(stateUser.currentUser);
-  
+
   const currentUser = currentUserState.get();
-  const dbUser = dbUserState.get();
-  
+
+  const [dbUser, setDbUser] = useState<any>(null);
+
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -37,6 +37,18 @@ function ProfileContent() {
     phone: '',
     profile_pic: ''
   });
+
+  useEffect(() => {
+    // Fetch user details from DB using hookstate's getUser
+    const fetchUser = async () => {
+      if (currentUser?.email) {
+        const userFromDb = await stateUser.fetchUserByEmail(currentUser.email);
+        setDbUser(userFromDb);
+      }
+    };
+    fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser?.email]);
 
   useEffect(() => {
     if (dbUser) {
@@ -69,6 +81,11 @@ function ProfileContent() {
     try {
       await stateUser.updateUser(dbUser.id, formData);
       setIsEditing(false);
+      // Refetch user from DB after update
+      if (stateUser.fetchUserById) {
+        const updatedUser = await stateUser.fetchUserById(dbUser.id);
+        setDbUser(updatedUser);
+      }
       toast({
         title: "Success",
         description: "Profile updated successfully"
@@ -110,7 +127,7 @@ function ProfileContent() {
           <div className="flex items-center space-x-4">
             <Avatar className="size-16">
               <AvatarImage
-                src={formData.profile_pic || currentUser?.photoURL || "https://picsum.photos/seed/user/64/64"}
+                src={formData.profile_pic}
                 alt="Profile"
               />
               <AvatarFallback className="text-lg">
@@ -144,7 +161,7 @@ function ProfileContent() {
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-                disabled={!isEditing}
+                disabled={true}
                 placeholder="Enter your email"
               />
             </div>
@@ -203,10 +220,6 @@ function ProfileContent() {
             <div>
               <p className="font-medium text-muted-foreground">User ID</p>
               <p className="font-mono text-xs">{dbUser?.id}</p>
-            </div>
-            <div>
-              <p className="font-medium text-muted-foreground">Project ID</p>
-              <p className="font-mono text-xs">{dbUser?.project_id || 'N/A'}</p>
             </div>
           </div>
         </CardContent>

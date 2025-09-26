@@ -85,7 +85,7 @@ const wrapState = () => {
       state.errorMessage.set("");
 
       try {
-        const response = await fetchClient(`${API_SERVER}/user/v1/`);
+        const response = await fetchClient(`${API_SERVER}/users/v1/`);
         const data = await response.json();
         
         if (!response.ok) {
@@ -107,7 +107,7 @@ const wrapState = () => {
       state.errorMessage.set("");
 
       try {
-        const response = await fetchClient(`${API_SERVER}/user/v1/${userId}`);
+        const response = await fetchClient(`${API_SERVER}/users/v1/${userId}`);
         const data = await response.json();
         
         if (!response.ok) {
@@ -156,7 +156,7 @@ const wrapState = () => {
       state.successMessage.set("");
 
       try {
-        const response = await fetchClient(`${API_SERVER}/user/v1/${userId}`, {
+        const response = await fetchClient(`${API_SERVER}/users/v1/${userId}`, {
           method: "PUT",
           body: JSON.stringify(userData),
         });
@@ -196,7 +196,7 @@ const wrapState = () => {
       state.successMessage.set("");
 
       try {
-        const response = await fetchClient(`${API_SERVER}/user/v1/${userId}`, {
+        const response = await fetchClient(`${API_SERVER}/users/v1/${userId}`, {
           method: "DELETE",
         });
 
