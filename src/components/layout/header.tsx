@@ -15,14 +15,7 @@ export default function Header() {
       <SidebarTrigger className="sm:hidden" />
       <div className="flex-1">{/* Can add breadcrumbs here if needed */}</div>
       <div className="flex items-center gap-1 sm:gap-3">
-        <Button
-          variant="outline"
-          size="icon"
-          className="h-8 w-8 sm:h-10 sm:w-10 p-1 sm:p-2"
-          title="Toggle theme"
-        >
-          <ThemeToggle />
-        </Button>
+        <ThemeToggle />
         <Button
           variant="outline"
           size="icon"
