@@ -29,12 +29,11 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 import { useTunnelState, Tunnel } from '@/hooks/tunnel';
 import { DeleteTunnelDialog } from '@/components/tunnels/DeleteTunnelDialog';
-import { Trash2, ExternalLink, AlertCircle, Copy, CheckCircle2 } from 'lucide-react';
+import { Trash2, ExternalLink, Copy } from 'lucide-react';
 
 export default function TunnelsPage() {
   return (
@@ -65,7 +64,6 @@ function TunnelsContent() {
     
     const initializeData = async () => {
       try {
-        tunnelState.clearMessages();
         await tunnelState.fetchAllTunnels();
       } catch (error) {
         if (isMounted) {
@@ -79,7 +77,6 @@ function TunnelsContent() {
     // Cleanup on unmount
     return () => {
       isMounted = false;
-      tunnelState.clearMessages();
     };
   }, []); // Empty dependency array - only run once on mount
 
@@ -116,12 +113,19 @@ function TunnelsContent() {
         }
       };
 
-      await tunnelState.createTunnel({
+      const result = await tunnelState.createTunnel({
         name: formData.name,
         endpoint: formData.endpoint,
         port: extractPortFromUrl(formData.endpoint),
         protocol: formData.protocol,
         description: formData.description
+      });
+
+      // Show success toast
+      toast({
+        title: "Success",
+        description: result.message || "Tunnel created successfully",
+        variant: "default",
       });
 
       // Reset form on success
@@ -131,9 +135,6 @@ function TunnelsContent() {
         protocol: '',
         description: ''
       });
-
-      // The tunnel is already added to the list by the createTunnel function
-      // No need to refresh the list
       
     } catch (error: any) {
       console.error('Failed to create tunnel:', error);
@@ -159,7 +160,15 @@ function TunnelsContent() {
     }
 
     try {
-      await tunnelState.deleteTunnel(deleteDialog.tunnel.id);
+      const result = await tunnelState.deleteTunnel(deleteDialog.tunnel.id);
+      
+      // Show success toast
+      toast({
+        title: "Success",
+        description: result.message || "Tunnel deleted successfully",
+        variant: "default",
+      });
+      
       setDeleteDialog({ open: false, tunnel: null });
     } catch (error: any) {
       console.error('Failed to delete tunnel:', error);
@@ -197,21 +206,6 @@ function TunnelsContent() {
         </p>
       </div>
       
-      {/* Show error message if any */}
-      {tunnelState.errorMessage.get() && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>{tunnelState.errorMessage.get()}</AlertDescription>
-        </Alert>
-      )}
-
-      {/* Show success message */}
-      {tunnelState.successMessage.get() && (
-        <Alert className="border-green-200 bg-green-50 text-green-800">
-          <CheckCircle2 className="h-4 w-4 text-green-600" />
-          <AlertDescription className="text-green-800">{tunnelState.successMessage.get()}</AlertDescription>
-        </Alert>
-      )}
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <Card>
