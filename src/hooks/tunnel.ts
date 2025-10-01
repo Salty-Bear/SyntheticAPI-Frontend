@@ -27,8 +27,6 @@ interface TunnelQuery {
 
 interface TunnelState {
   loading: boolean;
-  errorMessage: string;
-  successMessage: string;
   tunnels: Tunnel[];
   currentTunnel: Tunnel | null;
   loadingTunnels: boolean;
@@ -40,8 +38,6 @@ interface TunnelState {
 
 const state = hookstate<TunnelState>({
   loading: false,
-  errorMessage: "",
-  successMessage: "",
   tunnels: [],
   currentTunnel: null,
   loadingTunnels: false,
@@ -54,8 +50,6 @@ const state = hookstate<TunnelState>({
 // Create separate action functions to prevent recreation on every render
 const createTunnel = async (tunnelData: Tunnel) => {
   state.creatingTunnel.set(true);
-  state.errorMessage.set("");
-  state.successMessage.set("");
 
   try {
     const response = await fetchClient(`${API_SERVER}/tunnels/v1/`, {
@@ -69,7 +63,6 @@ const createTunnel = async (tunnelData: Tunnel) => {
     }
 
     const successMessage = data.message || "Tunnel created successfully";
-    state.successMessage.set(successMessage);
     
     // Add the new tunnel to the tunnels array if it exists in response
     if (data.data) {
@@ -86,7 +79,6 @@ const createTunnel = async (tunnelData: Tunnel) => {
     };
   } catch (error: any) {
     const errorMessage = error.message || "Failed to create tunnel";
-    state.errorMessage.set(errorMessage);
     console.error('Create tunnel error:', error);
     throw new Error(errorMessage);
   } finally {
@@ -102,7 +94,6 @@ const wrapState = () => {
     // Get all tunnels
     fetchAllTunnels: async (query?: TunnelQuery) => {
       state.loadingTunnels.set(true);
-      state.errorMessage.set("");
 
       try {
         // Build query string if query parameters are provided
@@ -131,8 +122,8 @@ const wrapState = () => {
         const tunnelsData = data.tunnels || data.data || [];
         state.tunnels.set(tunnelsData);
       } catch (error: any) {
-        state.errorMessage.set(error.message || "Failed to fetch tunnels");
         state.tunnels.set([]);
+        console.error('Failed to fetch tunnels:', error);
       } finally {
         state.loadingTunnels.set(false);
       }
@@ -141,7 +132,6 @@ const wrapState = () => {
     // Get tunnel by ID
     fetchTunnelById: async (tunnelId: string) => {
       state.loadingTunnel.set(true);
-      state.errorMessage.set("");
 
       try {
         const response = await fetchClient(`${API_SERVER}/tunnels/v1/${tunnelId}`);
@@ -154,8 +144,8 @@ const wrapState = () => {
         state.currentTunnel.set(data.data || null);
         return data.data;
       } catch (error: any) {
-        state.errorMessage.set(error.message || "Failed to fetch tunnel");
         state.currentTunnel.set(null);
+        console.error('Failed to fetch tunnel:', error);
         throw error;
       } finally {
         state.loadingTunnel.set(false);
@@ -165,8 +155,6 @@ const wrapState = () => {
     // Update tunnel by ID
     updateTunnel: async (tunnelId: string, tunnelData: Partial<Tunnel>) => {
       state.updatingTunnel.set(true);
-      state.errorMessage.set("");
-      state.successMessage.set("");
 
       try {
         const response = await fetchClient(`${API_SERVER}/tunnels/v1/${tunnelId}`, {
@@ -178,8 +166,6 @@ const wrapState = () => {
         if (!response.ok) {
           throw new Error(data.message || "Failed to update tunnel");
         }
-
-        state.successMessage.set(data.message || "Tunnel updated successfully");
         
         // Update the tunnel in the tunnels array
         if (data.data) {
@@ -195,7 +181,7 @@ const wrapState = () => {
         
         return data.data;
       } catch (error: any) {
-        state.errorMessage.set(error.message || "Failed to update tunnel");
+        console.error('Failed to update tunnel:', error);
         throw error;
       } finally {
         state.updatingTunnel.set(false);
@@ -205,8 +191,6 @@ const wrapState = () => {
     // Delete tunnel by ID
     deleteTunnel: async (tunnelId: string) => {
       state.deletingTunnel.set(true);
-      state.errorMessage.set("");
-      state.successMessage.set("");
 
       try {
         const response = await fetchClient(`${API_SERVER}/tunnels/v1/${tunnelId}`, {
@@ -225,8 +209,6 @@ const wrapState = () => {
         if (!response.ok) {
           throw new Error(data.message || `Failed to delete tunnel. Status: ${response.status}`);
         }
-
-        state.successMessage.set(data.message || "Tunnel deleted successfully");
         
         // Immediately remove the tunnel from the tunnels array
         state.tunnels.set(currentTunnels => 
@@ -241,7 +223,6 @@ const wrapState = () => {
         return { success: true, message: data.message || "Tunnel deleted successfully" };
       } catch (error: any) {
         const errorMessage = error.message || "Failed to delete tunnel";
-        state.errorMessage.set(errorMessage);
         console.error('Delete tunnel error:', error);
         throw new Error(errorMessage);
       } finally {
@@ -252,12 +233,6 @@ const wrapState = () => {
     // Clear current tunnel
     clearCurrentTunnel: () => {
       state.currentTunnel.set(null);
-    },
-
-    // Clear messages
-    clearMessages: () => {
-      state.errorMessage.set("");
-      state.successMessage.set("");
     },
 
     // Actions only - state values are handled in useTunnelState
@@ -275,8 +250,6 @@ export const useTunnelState = () => {
     ...actions,
     // Use hookstate values directly to maintain reactivity
     loading: hookState.loading,
-    errorMessage: hookState.errorMessage,
-    successMessage: hookState.successMessage,
     tunnels: hookState.tunnels,
     currentTunnel: hookState.currentTunnel,
     loadingTunnels: hookState.loadingTunnels,   
