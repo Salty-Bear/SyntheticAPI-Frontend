@@ -4,7 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Bell, Github, User } from 'lucide-react';
 import { useAuth } from '@/hooks/auth';
 import { useRouter } from 'next/navigation';
+
 import { ThemeToggle } from '../theme-toggle';
+import './header-abs.css';
 
 export default function Header() {
   const { user } = useAuth();
@@ -14,7 +16,8 @@ export default function Header() {
     <header className="sticky top-0 z-10 flex h-14 items-center gap-2 sm:gap-4 border-b bg-background px-2 sm:px-6 sm:static sm:h-auto sm:border-0 sm:bg-transparent">
       <SidebarTrigger className="sm:hidden" />
       <div className="flex-1">{/* Can add breadcrumbs here if needed */}</div>
-      <div className="flex items-center gap-1 sm:gap-3">
+      {/* Absolute icon group for improved UI and isolation */}
+      <div className="absolute-icon-group">
         <ThemeToggle />
         <Button
           variant="outline"
