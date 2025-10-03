@@ -45,8 +45,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Plus, Trash2, Copy, ExternalLink, Link as LinkIcon, Search, Edit } from 'lucide-react';
+
+import { Plus, Trash2, Copy, ExternalLink, Link as LinkIcon, Search, Edit, Eye } from 'lucide-react';
 import Link from 'next/link';
+import { TestCasePreview } from '@/components/generate';
 
 type DataType =
   | 'string'
@@ -328,6 +330,13 @@ export function GenerationForm() {
     schema.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
     schema.description?.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // --- Preview dialog state ---
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewData, setPreviewData] = useState<any>(null);
+
+  // --- Get output_data for preview (old global preview, now per-row) ---
+  // const outputData = currentGenerate?.get()?.output_data;
 
   return (
     <div className="space-y-6">
@@ -689,6 +698,17 @@ export function GenerationForm() {
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => {
+                              setPreviewData(schema.output_data);
+                              setPreviewOpen(true);
+                            }}
+                            title="Preview test cases"
+                          >
+                            <Eye className="h-4 w-4" />
+                          </Button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -701,6 +721,19 @@ export function GenerationForm() {
       </Card>
 
 
+
+
+      {/* Test Case Preview Dialog */}
+      <Dialog open={previewOpen} onOpenChange={setPreviewOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Test Case Preview</DialogTitle>
+          </DialogHeader>
+          <div>
+            <TestCasePreview output_data={previewData} />
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Delete Confirmation Dialog */}
       <AlertDialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
